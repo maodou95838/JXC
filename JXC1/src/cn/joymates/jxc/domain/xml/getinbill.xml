@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"     
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper namespace="getinbill">
+	<!-- 增加采购单/登记采购单 -->	
+	<insert id="savelist" parameterType="Getinbill">
+		insert into get_in_bill_tb(bill_id,bill_code,get_in_date,reg_date,reg_person,total_money,remark,remark1,buyer_person) values
+		(#{billId},#{billCode},#{getInDate},#{regDate},#{regPerson},#{totalMoney},#{remark},#{remark1},#{buyerPerson})
+	</insert>
+	<!-- 查询采购单 -->
+	<select id="selectlist" resultType="Getinbill">
+		select
+		gt.bill_id billId,
+		gt.bill_code billCode,
+		gt.get_in_date getInDate,
+		gt.reg_date regDate,
+		gt.reg_person regPerson,
+		gt.total_money totalMoney,
+		gt.remark remark,
+		gt.remark1 remark1,
+		gt.buyer_person buyerPerson
+		from 
+		get_in_bill_tb gt
+	</select>
+	
+	<!--修改采购单  -->
+	<update id="updatelist"  parameterType="Getinbill">
+		update get_in_bill_tb set 
+			get_in_date = #{getInDate},
+			total_money = #{totalMoney},
+			remark = #{remark},
+			buyer_person = #{buyerPerson},
+			bill_code = #{billCode}
+	    where
+	    	 bill_id = #{billId}
+	</update>
+	
+	<!-- 删除采购单 -->
+	<delete id="deletelist" parameterType="String">
+		delete from get_in_bill_tb where bill_id=#{billId}
+	</delete>
+	<!-- 根据ID查找采购单 -->
+	<select id="selectlistById" parameterType="String" resultType="Getinbill">
+		select 
+		gb.bill_id billId,
+		gb.bill_code billCode,
+		gb.get_in_date getInDate,
+		gb.reg_date regDate,
+		gb.reg_person regPerson,
+		gb.total_money totalMoney,
+		gb.remark remark,
+		gb.remark1 remark1,
+		gb.buyer_person buyerPerson
+		from 
+		get_in_bill_tb gb
+		where gb.bill_Id=#{billId}
+	</select>
+	<!-- 根据采购单编号查找采购单 -->
+	<select id="selectlistByCode" parameterType="String" resultType="Getinbill">
+		select 
+		gb.bill_id billId,
+		gb.bill_code billCode,
+		gb.get_in_date getInDate,
+		gb.reg_date regDate,
+		gb.reg_person regPerson,
+		gb.total_money totalMoney,
+		gb.remark remark,
+		gb.remark1 remark1,
+		gb.buyer_person buyerPerson
+		from 
+		get_in_bill_tb gb
+		where gb.bill_code=#{billCode}
+	</select>
+	<!-- json -->
+	<select id="selectBycateId" parameterType="String" resultType="Goods">
+		select * from goods_tb where 1=1 and cate_id = #{cateId}
+	</select>
+	
+	
+	
+	<!--增加采购的商品 -->
+	<insert id="savegoods" parameterType="getin">
+		insert into get_in_tb(get_in_goods_id,bill_id,goods_id,price,connt,total_price,remark) values(#{getInGoodsId},#{billId},#{goodsId},#{price},#{connt},#{totalPrice},#{remark})
+	</insert>
+	<!--根据bill_id查询采购商品表  -->
+	<select id="selectGetin" parameterType="String" resultType="Getin">
+		select
+		gt.get_in_goods_id getInGoodsId,
+		gt.bill_id billId,
+		gt.goods_id goodsId,
+		gt.price price,
+		gt.connt connt,
+		gt.total_price totalPrice,
+		gt.remark remark
+		from
+		get_in_tb gt
+		where gt.bill_id=#{billId}
+	</select>
+	<!-- 修改商品表清单 -->
+	<update id="updateGetin" parameterType="Getin">
+		update get_in_tb set bill_id=#{billId},goods_id=#{goodsId},price=#{price},connt=#{connt},total_price=#{totalPrice},remark=#{remark} where get_in_goods_id=#{getInGoodsId}
+	</update>
+	<!-- 删除商品清单 -->
+	<delete id="deleteGetin" parameterType="String">
+		delete from get_in_tb where bill_id=#{billId}
+	</delete>
+</mapper>

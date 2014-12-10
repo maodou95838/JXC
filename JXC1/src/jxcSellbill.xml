@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="sellbill" namespace="/admin/sellbill" extends="struts-default">
+		<action name="selllist">
+       		<result>/WEB-INF/sellbill/selllist_save.jsp</result>
+       	</action>
+       	<action name="maintainlist">
+       		<result>/WEB-INF/sellbill/selllist_maintain.jsp</result>
+       	</action>
+       	<action name="disposelist">
+       		<result>/WEB-INF/sellbill/selllist_dispose.jsp</result>
+       	</action>
+       	<!-- sell bill search -->
+       	<action name="searchHome">
+       		<result>/WEB-INF/sellbill/sell_bill_search_home.jsp</result>
+       	</action>
+       	<action name="billsearch_*" class="cn.joymates.jxc.action.sellbill.SessBillSearchAction" method="{1}">
+       		<result name="gosave">/WEB-INF/sellbill/selllist_savepage.jsp</result>
+       		<result name="gomaintain">/WEB-INF/sellbill/selllist_maintainpage.jsp</result>
+       		<result name="allsellbill">/WEB-INF/sellbill/selllist_maintain.jsp</result>
+       		<result name="godispose">/WEB-INF/sellbill/selllist_disposepage.jsp</result>
+       		<result name="dispose">/WEB-INF/sellbill/selllist_dispose.jsp</result>
+       		<result name="billDetail">/WEB-INF/sellbill/sell_bill_detail.jsp</result>
+       		<result name="search">/WEB-INF/sellbill/sell_bill_search_home.jsp</result>
+       		<result name="memberlist">/WEB-INF/sellbill/selllist_save.jsp</result>
+       	</action>
+    </package>
+</struts>

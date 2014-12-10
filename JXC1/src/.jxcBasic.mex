@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="login" location="0,0" size="0,0">
+    <action name="login" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="index.jsp" />
+      </result>
+      <result name="fail">
+        <resourceEdge source="fail" routing="0" target="login.jsp" />
+      </result>
+    </action>
+  </package>
+  <package name="basic" location="0,0" size="0,0">
+    <action name="roleMgr" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="role_mgr.jsp" />
+      </result>
+    </action>
+    <action name="addRole" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="role_add.jsp" />
+      </result>
+    </action>
+    <action name="role_*" location="0,0" size="0,0">
+      <result name="find">
+        <resourceEdge source="find" routing="0" target="role_mgr.jsp" />
+      </result>
+      <result name="modifyUI">
+        <resourceEdge source="modifyUI" routing="0" target="role_modify.jsp" />
+      </result>
+      <result name="resourceList">
+        <resourceEdge source="resourceList" routing="0" target="role_auth.jsp" />
+      </result>
+    </action>
+    <action name="userMgr" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="user_mgr.jsp" />
+      </result>
+    </action>
+    <action name="userAddUI" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="user_add.jsp" />
+      </result>
+    </action>
+    <action name="user_*" location="0,0" size="0,0">
+      <result name="find">
+        <resourceEdge source="find" routing="0" target="user_mgr.jsp" />
+      </result>
+      <result name="modifyUI">
+        <resourceEdge source="modifyUI" routing="0" target="user_modify.jsp" />
+      </result>
+      <result name="pwdOver">
+        <resourceEdge source="pwdOver" routing="0" target="pwd_modify.jsp" />
+      </result>
+    </action>
+    <action name="pwdUI" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="pwd_modify.jsp" />
+      </result>
+    </action>
+  </package>
+  <webResource name="index.jsp" path="/index.jsp" location="0,0" size="0,0" />
+  <webResource name="login.jsp" path="/login.jsp" location="0,0" size="0,0" />
+  <webResource name="user_mgr.jsp" path="/WEB-INF/rightMgr/user_mgr.jsp" location="0,0" size="0,0" />
+  <webResource name="role_mgr.jsp" path="/WEB-INF/rightMgr/role_mgr.jsp" location="0,0" size="0,0" />
+  <webResource name="role_add.jsp" path="/WEB-INF/rightMgr/role_add.jsp" location="0,0" size="0,0" />
+  <webResource name="role_modify.jsp" path="/WEB-INF/rightMgr/role_modify.jsp" location="0,0" size="0,0" />
+  <webResource name="role_auth.jsp" path="/WEB-INF/rightMgr/role_auth.jsp" location="0,0" size="0,0" />
+  <webResource name="category_add.jsp" path="/WEB-INF/rightMgr/category_add.jsp" location="0,0" size="0,0" />
+  <webResource name="goods_show.jsp" path="/WEB-INF/rightMgr/goods_show.jsp" location="0,0" size="0,0" />
+  <webResource name="user_add.jsp" path="/WEB-INF/rightMgr/user_add.jsp" location="0,0" size="0,0" />
+  <webResource name="user_modify.jsp" path="/WEB-INF/rightMgr/user_modify.jsp" location="0,0" size="0,0" />
+  <webResource name="pwd_modify.jsp" path="/WEB-INF/rightMgr/pwd_modify.jsp" location="0,0" size="0,0" />
+</Struts2Diagram>
+

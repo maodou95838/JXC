@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="cate" location="10,270" size="1540,385">
+    <action name="category" location="1325,57" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="category_mar.jsp" />
+      </result>
+    </action>
+    <action name="goods" location="1325,197" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="goods_show.jsp" />
+      </result>
+    </action>
+    <action name="addCategory" location="1080,197" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="category_add.jsp" />
+      </result>
+    </action>
+    <action name="updateCategory" location="1080,92" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="category_update.jsp" />
+      </result>
+    </action>
+    <action name="addGoods" location="835,92" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="goods_add.jsp" />
+      </result>
+    </action>
+    <action name="updateGoods" location="590,92" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="goods_update.jsp" />
+      </result>
+    </action>
+    <action name="category_*" location="65,71" size="150,83">
+      <result name="findall">
+        <resourceEdge source="findall" routing="0" target="category_mar.jsp" />
+      </result>
+      <result name="insert">
+        <resourceEdge source="insert" routing="0" target="category_add.jsp" />
+      </result>
+      <result name="findbyone">
+        <resourceEdge source="findbyone" routing="0" target="category_update.jsp" />
+      </result>
+    </action>
+    <action name="goods_*" location="240,236" size="150,104">
+      <result name="findall">
+        <resourceEdge source="findall" routing="0" target="goods_show.jsp" />
+      </result>
+      <result name="insert">
+        <resourceEdge source="insert" routing="0" target="goods_show.jsp" />
+      </result>
+      <result name="zengj">
+        <resourceEdge source="zengj" routing="0" target="goods_add.jsp" />
+      </result>
+      <result name="findbyone">
+        <resourceEdge source="findbyone" routing="0" target="goods_update.jsp" />
+      </result>
+    </action>
+  </package>
+  <webResource name="category_mar.jsp" path="/WEB-INF/category/category_mar.jsp" location="48,10" size="150,55" />
+  <webResource name="goods_show.jsp" path="/WEB-INF/category/goods_show.jsp" location="366,920" size="150,55" />
+  <webResource name="category_add.jsp" path="/WEB-INF/category/category_add.jsp" location="1063,1025" size="150,55" />
+  <webResource name="category_update.jsp" path="/WEB-INF/category/category_update.jsp" location="1055,115" size="150,55" />
+  <webResource name="goods_add.jsp" path="/WEB-INF/category/goods_add.jsp" location="825,815" size="150,55" />
+  <webResource name="goods_update.jsp" path="/WEB-INF/category/goods_update.jsp" location="572,710" size="150,55" />
+</Struts2Diagram>
+

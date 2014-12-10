@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="sellbill" location="10,10" size="315,910">
+    <action name="selllist" location="100,57" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="selllist_save.jsp" />
+      </result>
+    </action>
+    <action name="maintainlist" location="100,267" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="selllist_maintain.jsp" />
+      </result>
+    </action>
+    <action name="disposelist" location="100,442" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="selllist_dispose.jsp" />
+      </result>
+    </action>
+    <action name="searchHome" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="sell_bill_search_home.jsp" />
+      </result>
+    </action>
+    <action name="billsearch_*" location="0,0" size="0,0">
+      <result name="gosave">
+        <resourceEdge source="gosave" routing="0" target="selllist_savepage.jsp" />
+      </result>
+      <result name="gomaintain">
+        <resourceEdge source="gomaintain" routing="0" target="selllist_maintainpage.jsp" />
+      </result>
+      <result name="allsellbill">
+        <resourceEdge source="allsellbill" routing="0" target="selllist_maintain.jsp" />
+      </result>
+      <result name="godispose">
+        <resourceEdge source="godispose" routing="0" target="selllist_disposepage.jsp" />
+      </result>
+      <result name="dispose">
+        <resourceEdge source="dispose" routing="0" target="selllist_dispose.jsp" />
+      </result>
+      <result name="billDetail">
+        <resourceEdge source="billDetail" routing="0" target="sell_bill_detail.jsp" />
+      </result>
+      <result name="search">
+        <resourceEdge source="search" routing="0" target="sell_bill_search_home.jsp" />
+      </result>
+      <result name="memberlist">
+        <resourceEdge source="memberlist" routing="0" target="selllist_save.jsp" />
+      </result>
+    </action>
+  </package>
+  <webResource name="selllist_save.jsp" path="/WEB-INF/sell/selllist_save.jsp" location="382,30" size="150,55" />
+  <webResource name="selllist_show.jsp" path="/WEB-INF/sell/selllist_show.jsp" location="626,135" size="150,55" />
+  <webResource name="selllist_maintain.jsp" path="/WEB-INF/sell/selllist_maintain.jsp" location="373,240" size="150,55" />
+  <webResource name="selllist_dispose.jsp" path="/WEB-INF/sell/selllist_dispose.jsp" location="375,415" size="150,55" />
+  <webResource name="selllist_savepage.jsp" path="/WEB-INF/sell/selllist_savepage.jsp" location="90,975" size="150,55" />
+  <webResource name="selllist_maintainpage.jsp" path="/WEB-INF/sell/selllist_maintainpage.jsp" location="361,765" size="150,55" />
+  <webResource name="selllist_disposepage.jsp" path="/WEB-INF/sell/selllist_disposepage.jsp" location="363,590" size="150,55" />
+  <webResource name="selllist_save.jsp" path="/WEB-INF/sellbill/selllist_save.jsp" location="0,0" size="0,0" />
+  <webResource name="selllist_maintain.jsp" path="/WEB-INF/sellbill/selllist_maintain.jsp" location="0,0" size="0,0" />
+  <webResource name="selllist_dispose.jsp" path="/WEB-INF/sellbill/selllist_dispose.jsp" location="0,0" size="0,0" />
+  <webResource name="sell_bill_search_home.jsp" path="/WEB-INF/sellbill/sell_bill_search_home.jsp" location="0,0" size="0,0" />
+  <webResource name="selllist_savepage.jsp" path="/WEB-INF/sellbill/selllist_savepage.jsp" location="0,0" size="0,0" />
+  <webResource name="selllist_maintainpage.jsp" path="/WEB-INF/sellbill/selllist_maintainpage.jsp" location="0,0" size="0,0" />
+  <webResource name="selllist_disposepage.jsp" path="/WEB-INF/sellbill/selllist_disposepage.jsp" location="0,0" size="0,0" />
+  <webResource name="sell_bill_detail.jsp" path="/WEB-INF/sellbill/sell_bill_detail.jsp" location="0,0" size="0,0" />
+</Struts2Diagram>
+

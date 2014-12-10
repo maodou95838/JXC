@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="bill" location="933,10" size="280,910">
+    <action name="getinbill" location="65,57" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="buylist_mar.jsp" />
+      </result>
+    </action>
+    <action name="insertlist" location="65,162" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="buylist_insert.jsp" />
+      </result>
+    </action>
+    <action name="getinbill_*" location="65,320" size="150,146">
+      <result name="findall">
+        <resourceEdge source="findall" routing="0" target="buylist_insert.jsp" />
+      </result>
+      <result name="findalllist">
+        <resourceEdge source="findalllist" routing="0" target="buylist_maintain.jsp" />
+      </result>
+      <result name="findbyone">
+        <resourceEdge source="findbyone" routing="0" target="buylist_maintainpage.jsp" />
+      </result>
+      <result name="minute">
+        <resourceEdge source="minute" routing="0" target="buylist_minute.jsp" />
+      </result>
+    </action>
+    <action name="getin_*" location="65,827" size="150,41">
+      <result name="insert">
+        <resourceEdge source="insert" routing="0" target="buylist_mar.jsp" />
+      </result>
+      <result name="maintain">
+        <resourceEdge source="maintain" routing="0" target="buylist_maintain.jsp" />
+      </result>
+    </action>
+  </package>
+  <webResource name="buylist_mar.jsp" path="/WEB-INF/buy/buylist_mar.jsp" location="9,800" size="150,55" />
+  <webResource name="buylist_insert.jsp" path="/WEB-INF/buy/buylist_insert.jsp" location="145,345" size="150,55" />
+  <webResource name="buylist_maintain.jsp" path="/WEB-INF/buy/buylist_maintain.jsp" location="383,485" size="150,55" />
+  <webResource name="buylist_maintainpage.jsp" path="/WEB-INF/buy/buylist_maintainpage.jsp" location="651,590" size="150,55" />
+  <webResource name="buylist_minute.jsp" path="/WEB-INF/buy/buylist_minute.jsp" location="0,0" size="0,0" />
+</Struts2Diagram>
+

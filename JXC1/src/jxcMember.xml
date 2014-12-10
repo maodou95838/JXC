@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="member" extends="struts-default" namespace="/admin/member">
+		<!-- member level -->
+		<action name="level_home">
+			<result>/WEB-INF/member/level_home.jsp</result>
+		</action>
+		
+		<action name="level_reg">
+			<result>/WEB-INF/member/level_reg.jsp</result>
+		</action>
+		
+		<action name="grade_*" class="cn.joymates.jxc.action.member.MemberLevelAction" method="{1}">
+			<result name="find">/WEB-INF/member/level_home.jsp</result>
+			<result name="modifyUi">/WEB-INF/member/level_modify.jsp</result>
+		</action>
+		
+		<!-- member maint -->
+		<action name="member_*" class="cn.joymates.jxc.action.member.MemberAction" method="{1}">
+			<result name="find">/WEB-INF/member/member_maint_home.jsp</result>
+			<result name="chgCsumHome">/WEB-INF/member/charge_consume_home.jsp</result>
+			<result name="regUI">/WEB-INF/member/member_reg.jsp</result>
+			<result name="modifyUI">/WEB-INF/member/member_modify.jsp</result>
+			<result name="chargeUI">/WEB-INF/member/member_recharge.jsp</result>
+		</action>
+		
+		<!-- charge search -->
+		<action name="chag_csum_*" class="cn.joymates.jxc.action.member.ChargeConsumeAction" method="{1}">
+			<result name="home">/WEB-INF/member/charge_consume_home.jsp</result>
+			<result name="detail">/WEB-INF/member/member_consume.jsp</result>
+			<result name="detail1">/WEB-INF/member/member_charge.jsp</result>
+		</action>
+		
+		<!-- pack -->
+		<action name="pack_*" class="cn.joymates.jxc.action.member.PackMaintAction" method="{1}">
+			<result name="home">/WEB-INF/member/pack_home.jsp</result>
+			<result name="saveUI">/WEB-INF/member/pack_save.jsp</result>
+			<result name="modifyUI">/WEB-INF/member/pack_modify.jsp</result>
+			<result name="getPackUI">/WEB-INF/member/pack_get.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="cate" namespace="/admin/cate" extends="struts-default">
+		<action name="category">
+       		<result>/WEB-INF/category/category_mar.jsp</result>
+       	</action>
+       	<action name="goods">
+       		<result>/WEB-INF/category/goods_show.jsp</result>
+       	</action>
+       	<action name="addCategory" >
+            <result>/WEB-INF/category/category_add.jsp</result>
+        </action>
+        <action name="updateCategory" >
+            <result>/WEB-INF/category/category_update.jsp</result>
+        </action>
+        <action name="addGoods">
+        	<result>/WEB-INF/category/goods_add.jsp</result>
+        </action>
+        <action name="updateGoods" >
+            <result>/WEB-INF/category/goods_update.jsp</result>
+        </action>
+       	<action name="category_*" class="cn.joymates.jxc.action.category.CategoryAction" method="{1}">
+    		<result name="findall">/WEB-INF/category/category_mar.jsp</result>
+    		<result name="insert">/WEB-INF/category/category_add.jsp</result>
+    		<result name="findbyone">/WEB-INF/category/category_update.jsp</result>
+    	</action>
+        <action name="goods_*" class="cn.joymates.jxc.action.category.GoodsAction" method="{1}">
+        	<result name="findall">/WEB-INF/category/goods_show.jsp</result>
+        	<result name="insert">/WEB-INF/category/goods_show.jsp</result>
+        	<result name="zengj">/WEB-INF/category/goods_add.jsp</result>
+        	<result name="findbyone">/WEB-INF/category/goods_update.jsp</result>
+        </action>
+    </package>
+</struts>

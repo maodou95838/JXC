@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"     
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">     
+   
+<mapper namespace="category">
+    <insert id="saveCategory" parameterType="category">
+		insert into category_tb(cate_id,name,cate_desc,manage_person,count_unit,can_pack,is_count_in) values(#{cateId},#{name},#{cateDesc},#{managePerson},#{countUnit},#{canPack},#{isCountIn})
+     </insert>
+  	<delete id="deleteCategory" parameterType="String">
+  		delete from category_tb where cate_id=#{cateId}
+  	</delete>
+  	<update id="updateCategory" parameterType="category">
+  		update 
+  		category_tb 
+  		set 
+  		name=#{name},cate_desc=#{cateDesc},manage_person=#{managePerson},count_unit=#{countUnit},can_pack=#{canPack},is_count_in=#{isCountIn}
+  		where cate_id=#{cateId} 
+  	</update>
+  	<select id="findByCateId" parameterType="String" resultType="category">
+  		select  
+  		ca.cate_id cateId,
+  		ca.name name,
+  		ca.cate_desc cateDesc,
+  		ca.manage_person managePerson,
+  		ca.count_unit countUnit,
+  		ca.can_pack canPack,
+  		ca.is_count_in isCountIn
+  		from 
+  		category_tb ca 
+  		where 
+  		ca.cate_id=#{cateId}
+ 
+  	</select>
+  	<select id="findByName" parameterType="String" resultType="category">
+  		select * from category_tb where name = #{Name}
+  	</select>
+  	<select id="findAllCategory" resultType="category">
+  		select 
+  		ca.cate_id cateId,
+  		ca.name name,
+  		ca.cate_desc cateDesc,
+  		ca.manage_person managePerson,
+  		ca.count_unit countUnit
+  		from category_tb ca
+  	</select>
+  	
+  	
+  	<insert id="saveGoods" parameterType="goods">
+		insert into goods_tb(goods_id,cate_id,bar_code,goods_name,goods_desc,sell_price,have_count,remark) values(#{goodsId},#{cateId},#{barCode},#{goodsName},#{goodsDesc},#{sellPrice},#{haveCount},#{remark})
+     </insert>
+  	<delete id="deleteGoods" parameterType="String">
+  		delete from goods_tb where goods_id=#{goodsId}
+  	</delete>
+  	<update id="updateGoods" parameterType="goods">
+  		update goods_tb set 
+  		bar_code=#{barCode},goods_name=#{goodsName},goods_desc=#{goodsDesc},cate_id=#{cateId},
+  		sell_price=#{sellPrice},have_count=#{haveCount},modify_time=#{modifyTime},modify_person=#{modifyPerson},remark=#{remark} where goods_id=#{goodsId}
+  	</update>
+  	<select id="findByGoodId" parameterType="String" resultType="goods">
+  		select 
+  		gt.goods_id goodsId,
+  		gt.cate_id cateId,
+  		gt.bar_code barCode,
+  		gt.goods_name goodsName,
+  		gt.goods_desc goodsDesc,
+  		gt.sell_price sellPrice,
+  		gt.have_count haveCount,
+  		gt.modify_time modifyTime,
+  		gt.modify_person modifyPerson,
+  		gt.remark remark,
+  		gt.remark remark1 
+  		from goods_tb gt where gt.goods_id =#{goodsId}
+  	</select>
+  	<select id="findAllGoods" resultType="goods">
+  		select 
+  		gt.goods_id goodsId,
+  		gt.cate_id cateId,
+  		gt.bar_code barCode,
+  		gt.goods_name goodsName,
+  		gt.goods_desc goodsDesc,
+  		gt.sell_price sellPrice,
+  		gt.have_count haveCount,
+  		gt.modify_time modifyTime,
+  		gt.modify_person modifyPerson,
+  		gt.remark remark,
+  		gt.remark remark1 
+  		from 
+  		goods_tb gt
+  	</select>
+
+	<select id="findGoodsName" parameterType="String">
+  		select gt.goods_name goodsName from goods_tb gt where gt.cate_id =#{cateId}
+  	</select>
+
+  	
+  	<!-- cached -->
+  	<select id="findCategory4Cached" resultType="Category">
+  		select 
+  			cate_id cateId,
+  			name name,
+  			is_count_in isCountIn,
+  			can_pack canPack
+  		from 
+  		    category_tb
+  	</select>
+  	
+  	<select id="findGoods4Cached" parameterType="String" resultType="Goods">
+  		select 
+	  		gt.goods_id goodsId,
+	  		gt.cate_id cateId,
+	  		gt.goods_name goodsName,
+	  		gt.sell_price sellPrice,
+	  		gt.have_count haveCount,
+		    gt.bar_code barCode,
+		    gt.goods_desc goodsDesc
+  		from 
+  			goods_tb gt
+  		where gt.cate_id = #{cate_id}	
+  	</select>
+  	
+  	<!-- 根据goods_id查询goods_ta表的hava_count -->
+  	<select id="findCount" parameterType="String" resultType="Integer"> 
+  	  select
+  	  		gt.have_count haveCount
+  	  from 
+  			goods_tb gt
+  	  where gt.goods_id = #{goods_id}
+  	</select>
+  	<!--修改商品的数量-->
+	<update id="updateCount" parameterType="Goods">
+		update goods_tb set have_count=#{haveCount} where goods_id=#{goodsId}
+	</update>
+	<!--根据goods_Id查询cate_Id和商品名称-->
+	<select id="selectGoodsName" parameterType="String" resultType="Goods">
+		select
+			  gt.cate_id cateId,
+			  gt.goods_name goodsName
+		from
+			  goods_tb gt
+		where gt.goods_id=#{goodsId}
+	</select>
+	<!-- 根据cate_id 查询name -->
+	<select id="selectname" parameterType="String" resultType="category">
+		select
+			  ct.name name 
+		from
+			  category_tb ct
+		where ct.cate_id=#{cateId}
+	</select>
+	
+	<!-- 查询可存的商品类型id -->	
+	<select id="selectCanPackedCategory" resultType="String">
+		select 
+			cate_id
+		from category_tb 
+		where can_pack = '1'
+		
+	</select>
+</mapper>  

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="defaultStatementTimeout" value="25000"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias alias="User" type="cn.joymates.jxc.domain.User"/>
+		<typeAlias alias="Resource" type="cn.joymates.jxc.domain.Resource"/>
+		<typeAlias alias="Role" type="cn.joymates.jxc.domain.Role"/>
+		
+		<typeAlias alias="Category" type="cn.joymates.jxc.domain.Category"/>
+		<typeAlias alias="Goods" type="cn.joymates.jxc.domain.Goods"/>
+		<typeAlias alias="Getinbill" type="cn.joymates.jxc.domain.Getinbill"/>
+		<typeAlias alias="Getin" type="cn.joymates.jxc.domain.Getin"/>
+		<typeAlias alias="Sellbill" type="cn.joymates.jxc.domain.Sellbill"/>
+		<typeAlias alias="Sellgoods" type="cn.joymates.jxc.domain.Sellgoods"/>
+		
+		<typeAlias alias="MemberGrade" type="cn.joymates.jxc.domain.MemberGrade"/>
+		<typeAlias alias="Member" type="cn.joymates.jxc.domain.Member"/>
+		<typeAlias alias="MemberCharge" type="cn.joymates.jxc.domain.MemberCharge"/>
+		<typeAlias alias="MemberPack" type="cn.joymates.jxc.domain.MemberPack"/>
+		<typeAlias alias="PackAwayDetail" type="cn.joymates.jxc.domain.PackAwayDetail"/>
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="cn.joymates.jxc.db.ProxoolDataSourceFactory"></dataSource>
+		</environment>
+	</environments>
+	
+	<!-- ORM映射文件 -->
+	<mappers>
+		<mapper resource="cn/joymates/jxc/domain/xml/basic.xml" />
+		<mapper resource="cn/joymates/jxc/domain/xml/category.xml" /> 
+		<mapper resource="cn/joymates/jxc/domain/xml/getinbill.xml" /> 
+		<mapper resource="cn/joymates/jxc/domain/xml/sellbill.xml" /> 
+		<mapper resource="cn/joymates/jxc/domain/xml/member.xml" /> 
+	</mappers>
+	
+	
+</configuration> 

@@ -1,0 +1,17 @@
+/.example.mex
+/.jxcBasic.mex
+/.jxcCategory.mex
+/.jxcGetinbill.mex
+/.jxcMember.mex
+/.jxcSellbill.mex
+/.struts.mex
+/cn
+/config
+/jxcBasic.xml
+/jxcCategory.xml
+/jxcGetinbill.xml
+/jxcMember.xml
+/jxcSellbill.xml
+/log4j.properties
+/struts.xml
+/xwork-conversion.properties

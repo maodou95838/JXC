@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"     
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">     
+   
+<mapper namespace="member">
+	<!-- member grade -->
+  	<insert id="insertMemberGrade" parameterType="MemberGrade">
+  		insert into member_grade_tb
+			(grade_id, 
+			 grade_name
+			 <if test="#{gradeDesc} != null">
+				 ,grade_desc
+			 </if>
+			 ,
+			 islogout,
+			 grade_percent)
+		values(
+		     #{gradeId},
+		     #{gradeName}
+		      <if test="#{gradeDesc} != null">
+				 ,grade_desc
+			 </if>
+			 ,
+			 #{isLogout},
+			 #{gradePercent}
+		)	 
+  	</insert>
+  	
+  	<select id="selectMemberGradeById" parameterType="string" resultType="MemberGrade">
+  		select 
+  			grade_id gradeId,
+	        grade_name gradeName,
+	        grade_desc gradeDesc,
+	        islogout isLogout,
+	        logout_reason logoutReason,
+	        grade_percent gradePercent
+  		from 
+  			member_grade_tb
+  		where
+  			grade_id = #{grade_id}
+  	</select>
+  	
+  	<update id="updateMemberGrade" parameterType="MemberGrade">
+  		update 
+  			member_grade_tb
+  		set 
+	        grade_name = #{ gradeName}
+	        <if test="#{ gradeDesc} != null">
+	        	, grade_desc = #{gradeDesc}
+	        </if>
+	        <if test="#{ isLogout} != null">
+	        	, islogout = #{isLogout}
+	        </if>
+	         <if test="#{ logoutReason} != null">
+	        	, logout_reason = #{logoutReason}
+	        </if>
+	        ,grade_percent = #{gradePercent}
+	    where 
+	    	grade_id = #{gradeId}    
+  	</update>
+  	
+  	<select id="findAllMemberGrade4Cache" resultType="MemberGrade">
+  		select 
+  			grade_id gradeId,
+  		    grade_name gradeName
+  		from 	
+  			member_grade_tb
+  		where 
+  			islogout = '0'	
+  			
+  	</select>
+  	
+  	<insert id="insertMember" parameterType="Member">
+  		INSERT INTO
+    		member_tb
+    	(
+        	member_uuid,
+        	grade_id
+        	<if test="memberCode != null">
+       	    	,member_code
+       	    </if>
+       	    <if test="name2 != null">
+            	,name2
+            </if>
+           <if test="name != null">
+            	,name
+            </if>
+            ,sex
+            <if test="cellPhone1 != null">
+            	,cell_phone1
+            </if>
+       		 ,cell_phone
+        ,reg_date
+        ,is_logout
+        ,is_consume
+         <if test="leftMoney != null">
+            	,left_money
+         </if>
+        ,mark
+        ,remark
+        ,birthday
+    )
+    VALUES
+    (
+        #{memberUuid},
+        #{gradeId}
+        	<if test="memberCode != null">
+       	    	,#{memberCode}
+       	    </if>
+       	    <if test="name2 != null">
+            	,#{name2}
+            </if>
+           <if test="name != null">
+            	,#{name}
+            </if>
+            ,#{sex}
+            <if test="cellPhone1 != null">
+            	,#{cellPhone1}
+            </if>
+       		 ,#{cellPhone}
+        ,#{regDate}
+        ,#{isLogout}
+        ,#{isConsume}
+         <if test="leftMoney != null">
+            	,#{leftMoney}
+         </if>
+        ,#{mark}
+        ,#{remark}
+        ,#{birthday}
+    )
+  	</insert>
+  	
+  	<select id="findMemberById" parameterType="String" resultType="Member">
+  		SELECT
+   		 	member_uuid memberUuid,
+    		grade_id gradeId,
+    		member_code memberCode,
+    		name2        name2,        
+   			name         name,        
+    		sex          sex,         
+    		cell_phone1  cellPhone1,   
+   		    cell_phone   cellPhone,   
+    		reg_date     regDate,        
+    		is_logout    isLogout,     
+    		logout_date  goutDate,     
+    		logout_reason logoutReason, 
+    		is_consume   isConsume,    
+    		left_money   leftMoney,
+    		mark         mark,   
+		    modify_person modifyPerson,
+    		modify_time  modifyTime,     
+    		remark       remark,       
+    		remark1      remark1      
+		FROM
+    		member_tb
+    	WHERE 
+    		member_uuid = #{memberUuid}	
+  	</select>
+  	
+  	<select id="findMemberChargeById" parameterType="String" resultType="Member">
+  		SELECT
+   		 	m.member_uuid memberUuid,
+    		m.grade_id gradeId,
+    		m.member_code memberCode,
+    		m.name2        name2,        
+   			m.name         name,        
+    		m.sex          sex,   
+    		m.birthday     birthday,      
+    		m.cell_phone1  cellPhone1,   
+   		   	m.cell_phone   cellPhone,   
+    		m.reg_date     regDate,        
+    		m.is_logout    isLogout,     
+    		m.logout_date  goutDate,     
+    		m.logout_reason logoutReason, 
+    		m.is_consume   isConsume,    
+    		m.left_money   leftMoney,
+    		m.mark         mark,   
+		    m.modify_person modifyPerson,
+    		m.modify_time  modifyTime,     
+    		m.remark       remark,       
+    		c.money        remark1,
+    		c.charge_uuid  lastChargeUuid   
+		FROM
+    		member_tb m
+    	LEFT JOIN 
+    		member_charge_tb c
+    	ON 
+    		m.member_uuid = c.member_uuid	
+    	WHERE 
+    		m.member_uuid = #{memberUuid}	
+    	order by 
+    		c.charge_time desc	
+  	</select>
+  	
+  	<update id="updateMember" parameterType="Member" >
+  		UPDATE
+   		 		member_tb
+		SET
+    		grade_id = #{gradeId},
+   		    member_code = #{memberCode},
+    		name2 = #{name2},
+    		name = #{name},
+    		sex = #{sex},
+    		cell_phone1 = #{cellPhone1},
+    		cell_phone = #{cellPhone},
+    		is_logout = #{isLogout},
+    		logout_date = #{logoutDate},
+    		logout_reason = #{logoutReason},
+    		left_money = #{leftMoney},
+    		mark = #{mark},
+   		    modify_person = #{modifyPerson},
+    		modify_time = #{modifyTime},
+    		remark = #{remark},
+    		birthday = #{birthday}
+	WHERE 
+    		member_uuid = #{memberUuid}
+  	
+  	</update>
+  	
+  	<!-- 插入充值记录 -->
+  	<insert id="insertMemberCharge" parameterType="MemberCharge">
+  		INSERT INTO
+    		member_charge_tb
+    	(
+        	charge_uuid,
+        	member_uuid,
+        	money,
+        	charge_time,
+        	remark
+    	)
+    	VALUES
+    	(
+        	#{chargeUuid},
+        	#{memberUuid},
+        	#{money},
+        	#{chargeTime},
+        	#{remark}
+    	)
+  	
+  	</insert>
+  	
+  	<!-- 修改充值记录钱数 -->
+  	<update id="updateMemberChange" parameterType="MemberCharge">
+  		UPDATE
+		    member_charge_tb
+		SET
+		    money = #{money}
+		WHERE
+		    charge_uuid = #{chargeUuid}
+  	</update>
+  	
+  	<!-- 重新设置余额 -->
+  	<update id="updateMemberMoney" parameterType="Member" >
+  		UPDATE
+   		 		member_tb
+		SET
+    		left_money = #{leftMoney},
+    		mark = #{mark}
+		WHERE
+    		member_uuid = #{memberUuid}
+  	
+  	</update>
+  	
+  	<!-- 按会员id和商品id查询会员存单主键 -->
+  	<select id="selectByMemberIdAndGoodsId" parameterType="MemberPack" resultType="MemberPack">
+  		select 
+			pack_uuid packUuid,
+			left_count1 leftCount1
+		from 
+			member_pack_tb 
+		where 
+			member_uuid = #{memberUuid} and goods_id = #{goodsId}
+		order by 
+			reg_time desc
+  	
+  	</select>
+  	<insert id="insertMemberPack" parameterType="MemberPack">
+  		INSERT
+		INTO
+		    member_pack_tb
+		    (
+		        pack_uuid,
+		        member_uuid,
+		        goods_id,
+		        left_date,
+		        left_count,
+		        last_away_time,
+		        left_count1,
+		        reg_person,
+		        last_remark,
+		        remark,
+		        remark2,
+		        last_away_count,
+		        reg_time
+		    )
+		    VALUES
+		    (
+		        #{packUuid},
+		        #{memberUuid},
+		        #{goodsId},
+		        #{leftDate},
+		        #{leftCount},
+		        #{lastAwayTime},
+		        #{leftCount1},
+		        #{regPerson},
+		        #{lastRemark},
+		        #{remark},
+		        #{remark2},
+		        #{lastAwayCount},
+		        #{regTime}
+		    )
+  	
+  	</insert>
+  	
+  	<select id="selectMemberPackById" parameterType="MemberPack" resultType="MemberPack">
+  		SELECT
+		   	pack_uuid      packUuid , 		
+		    member_uuid    memberUuid , 		
+		    goods_id       goodsId , 		
+		    left_date      leftDate , 		    
+		    left_count      leftCount ,   
+		    last_away_time lastAwayTime ,      
+		    left_count1     leftCount1 ,	
+		    remark         remark , 		
+		    last_away_count lastAwayCount,
+		    last_remark lastRemark 	
+		FROM
+    		member_pack_tb
+    	where pack_uuid = #{packUuid}	
+  	
+  	</select>
+  	
+  	<!-- 存单维护的修改sql -->
+  	<update id="updateMemberPack1" parameterType="MemberPack">
+  		update member_pack_tb set
+		    left_date = #{leftDate} , 		    
+		    left_count = #{leftCount} , 
+		    left_count1 = #{leftCount1},  
+		    remark  = #{remark} 		
+		where 
+			 pack_uuid = #{packUuid} 			
+  	</update>
+  	
+  	<!-- 取单维护 -->
+  	<update id="updateMemberPack2" parameterType="MemberPack">
+  		update member_pack_tb set
+  			last_away_time = #{lastAwayTime},
+		    left_count1 = #{leftCount1},
+		    last_remark = #{lastRemark},
+		    last_away_count = #{lastAwayCount}
+		where 
+			 pack_uuid = #{packUuid} 			
+  	</update>
+  	
+  	<select id="selectDetailByPackId" parameterType="PackAwayDetail" resultType="map">
+  		select
+  			 p.left_count1,d.away_uuid, p.left_count,
+  			 p.last_away_count
+  		from
+  			 member_pack_tb p, pack_detail_tb d
+		where 
+			p.pack_uuid = d.pack_uuid and
+			p.pack_uuid = #{packUuid} and 
+			d.put_get = #{putGet}
+		order by put_get_time desc
+  	</select>
+  	
+  	<insert id="insertPackDetail" parameterType="PackAwayDetail">
+  		INSERT
+			INTO
+			    pack_detail_tb
+			    (
+			        away_uuid ,
+			        pack_uuid,
+			        put_get_time,
+			        put_get_count,
+			        reg_person,
+			        remark,
+			        put_get
+			    )
+			    VALUES
+			    (
+			        #{awayUuid},
+			        #{packUuid},
+			        #{putGetTime},
+			        #{putGetCount},
+			        #{rePerson},
+			        #{remark},
+			        #{putGet}
+			    )
+  	
+  	</insert>
+  	
+  	<update id="updateDetail" parameterType="PackAwayDetail">
+  		UPDATE
+    		pack_detail_tb
+		SET
+		    put_get_time = #{putGetTime},
+		    put_get_count = #{putGetCount},
+		    remark = #{remark}
+		WHERE
+		    away_uuid = #{awayUuid}
+  	
+  	</update>
+  	
+  	<delete id="deleteMemberPack" parameterType="string">
+  		delete from member_pack_tb
+  		where pack_uuid = #{pack_uuid}
+  	</delete>
+  	
+  	<update id="updatePackDetailBatch" parameterType="PackAwayDetail">
+  		UPDATE
+    		pack_detail_tb
+		SET
+		    pack_uuid = #{remark}
+		WHERE
+		    pack_uuid = #{remark2}
+  	</update>
+  	
+  	<!-- 查询折扣价 -->
+  	<select id="selectGradepercent" parameterType="String" resultType="MemberGrade">
+  		select
+  		  	mt.grade_id gradeId,
+  		  	mt.grade_name gradeName,
+  		  	mt.grade_desc gradeDesc,
+ 			mt.grade_percent gradePercent
+  		from 
+  			member_grade_tb mt 
+  		where 
+  			mt.grade_id=#{gradeId}
+  	</select>
+  	<!-- 设置是否消费过 -->
+  	<update id="updateMemberIsConsume" parameterType="Member">
+  		update
+  		member_tb
+  		set
+  		is_consume=#{isConsume},
+  		left_money=#{leftMoney}
+  		where member_uuid=#{memberUuid}
+  	</update>
+  	<select id="selectMember" parameterType="Member" resultType="Member">
+  		select 
+	  		mt.member_uuid memberUuid,
+	  		mt.grade_id gradeId,
+	  		mt.member_code memberCode,
+	  		mt.name,
+	  		mt.name2,
+	  		mt.sex,
+	  		mt.cell_phone cellPhone,
+	  		mt.reg_date regDate,
+	  		mt.is_logout isLogout,
+	  		mt.logout_date logoutDate,
+	  		mt.logout_reason logoutReason,
+	  		mt.is_consume isConsume,
+	  		mt.left_money leftMoney,
+	  		mt.mark mark,
+	  		mt.modify_person modifyPerson,
+	  		mt.modify_time modifyTime,
+	  		mt.remark remark,
+	  		mt.remark1 remark1,
+	  		mt.birthday birthday
+  		from 
+  			member_tb mt 
+  		where 
+  			mt.cell_phone=#{cellPhone}
+  			<if test="memberUuid != null">
+  				and member_uuid != #{memberUuid}
+  			</if>
+  	</select>	
+</mapper>  

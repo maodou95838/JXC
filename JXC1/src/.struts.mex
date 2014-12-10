@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <include file="jxcBasic.xml" location="0,0" size="0,0" />
+  <include file="jxcCategory.xml" location="0,0" size="0,0" />
+  <include file="jxcGetinbill.xml" location="0,0" size="0,0" />
+</Struts2Diagram>
+

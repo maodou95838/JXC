@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"     
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper namespace="sellbill">
+	<!--add销售单据 -->	
+	<insert id="addsellbill" parameterType="Sellbill">
+		insert into sell_bill_tb(
+				sell_bill_id,
+				sell_bill_code,
+				member_uuid,
+				sell_date,
+				reg_time,
+				reg_person,
+				total_price,
+				percent_price,
+				actual_money,
+				sell_bill_image,
+				customer_desc,
+				take_money_person,
+				bill_person,
+				is_exec_bill,
+				exec_reason,
+				exec_remark,
+				recovery_time,
+				recovery_person,
+				recovery_remark,
+				mark,
+				remark,
+				remark1,
+				is_pay)  
+		values(#{sellBillId},#{sellBillCode},#{memberUuid},#{sellDate},#{regTime},#{regPerson},#{totalPrice},#{percentPrice},#{actualMoney},#{sellBillImage},
+		#{customerDesc},#{takeMoneyPerson},#{billPerson},#{isExecBill},#{execReason},#{execRemark},#{recoveryTime},#{recoveryPerson},#{recoveryRemark},
+		#{mark},#{remark},#{remark1},#{isPay})
+	</insert>
+	
+	<!-- find sell bill and member info by sell bill id -->
+	<select id="findSellbillById" parameterType="Sellbill" resultType="map">
+  		select 
+  			s.sell_bill_id     ,      
+        	s.member_uuid 		,    
+        	s.sell_date 		,	    
+       		s.reg_time 			,	
+        	s.reg_person 		,		
+        	s.total_price 		,	
+        	s.percent_price		,	
+	        s.actual_money		,	
+	        s.sell_bill_image 	,	
+	        s.customer_desc		,	
+	        s.take_money_person ,      
+	        s.bill_person 		,	
+	        s.is_exec_bill		,	
+	        s.exec_reason 		,	
+	        s.exec_remark 		,	
+	        s.recovery_time		,	
+	        s.recovery_person	,		
+	        s.recovery_remark	,		
+	        s.mark 				,	
+	        s.remark 			,
+	        s.is_pay			,		
+  			m.member_uuid,
+  		 	m.cell_phone ,
+  		 	m.name,
+  		 	m.left_money,
+  		 	m.member_code
+		from member_tb m right join sell_bill_tb s 
+			on m.member_uuid = s.member_uuid
+		where 	 
+			s.sell_bill_id=#{sellBillId} 
+		<if test="memberUuid != null">	
+			and m.member_uuid=#{memberUuid}
+		</if>	
+  	</select>
+  	
+  	
+  	<!-- find goods list by bill id -->
+  	<select id="findSellGoodsByBillId" parameterType="Sellbill" resultType="map">
+  		select 
+  			   g.goods_id 		,
+		       g.cate_id			,
+		       g.bar_code 		,
+		       g.goods_name 		,
+		       g.goods_desc 		,
+		       g.sell_price 		,
+		       g.have_count 		,
+			   sg.sell_goods_id 		,
+		       sg.sell_bill_id 		,
+		       sg.goods_id 			,
+		       sg.sell_count			,
+		       sg.price 				,
+		       sg.total_price			,
+		       sg.remark 				
+  		from
+  			 sell_bill_tb sb, sell_goods sg,goods_tb g
+		where 
+			sb.sell_bill_id = sg.sell_bill_id and sg.goods_id = g.goods_id
+		and 
+			sb.sell_bill_id = #{sellBillId}
+  	
+  	</select>
+  	<!-- 查询销售单 -->
+  	<select id="selectsellbill" resultType="sellbill">
+  		select 
+  			sbt.sell_bill_id,
+  			sbt.member_uuid,
+  			sbt.sell_date,
+  			sbt.reg_time,
+  			sbt.reg_person,
+  			sbt.total_price,
+  			sbt.percent_price,
+  			sbt.actual_money,
+  			sbt.sell_bill_image,
+  			sbt.customer_desc,
+  			sbt.take_money_person,
+  			sbt.bill_person,
+  			sbt.is_exec_bill,
+  			sbt.exec_reason,
+  			sbt.exec_remark,
+  			sbt.recovery_time,
+  			sbt.recovery_person,
+  			sbt.recovery_remark,
+  			sbt.mark,
+  			sbt.remark,
+  			sbt.remark1
+  		from 
+  			sell_bill_tb sbt
+  	</select>
+  	<!-- add销售商品表 -->
+  	<insert id="addsellgoods" parameterType="Sellgoods">
+  		insert into sell_goods(
+  			sell_goods_id,
+  			sell_bill_id,
+  			goods_id,
+  			sell_count,
+  			price,
+  			total_price,
+  			remark
+  			)
+  			values(#{sellGoodsId},#{sellBillId},#{goodsId},#{sellCount},#{price},#{totalPrice},#{remark})
+  	</insert>
+  	
+  	<!-- 修改销售表 -->
+  	<update id="updateSellbill" parameterType="Sellbill" >
+		update 
+			sell_bill_tb
+		set
+			sell_bill_code=#{sellBillCode},
+			sell_date=#{sellDate},
+			bill_person=#{billPerson},
+			customer_desc=#{customerDesc},
+			total_price=#{totalPrice},
+			percent_price=#{percentPrice},
+			actual_money=#{actualMoney},
+			is_pay=#{isPay},
+			member_uuid=#{memberUuid},
+			remark = #{remark},
+			is_exec_bill = #{isExecBill}
+		where sell_bill_id=#{sellBillId}
+  	</update>
+  	
+  	<update id="updatesbill" parameterType="Sellbill">
+  		update 
+		sell_bill_tb
+		set
+		recovery_remark=#{recoveryRemark},recovery_person=#{recoveryPerson},recovery_time=#{recoveryTime},is_exec_bill=#{isExecBill}
+		where sell_bill_id=#{sellBillId}
+  	</update>
+  	<!-- 删除销售商品表 -->
+  	<delete id="deletesellgoods" parameterType="String">
+  		delete from sell_goods where sell_bill_id=#{sellBillsId}
+  	</delete>
+  	<select id="findBySellbillid" parameterType="String" resultType="Sellbill">
+  		select
+  		st.sell_bill_id sellBillId,
+  		st.sell_bill_code sellBillCode,
+  		st.member_uuid memberUuid,
+  		st.sell_date sellDate ,
+  		st.reg_time regTime,
+  		st.reg_person regPerson,
+  		st.total_price totalPrice,
+  		st.percent_price percentPrice,
+  		st.actual_money actualMoney,
+  		st.sell_bill_image sellBillImage,
+  		st.customer_desc customerDesc,
+  		st.take_money_person takeMoneyPerson,
+  		st.bill_person billPerson,
+  		st.is_exec_bill isExecBill,
+  		st.exec_reason execReason,
+  		st.exec_remark execRemark,
+  		st.recovery_time recoveryTime,
+  		st.recovery_person recoveryPerson,
+  		st.recovery_remark recoveryRemark,
+  		st.mark mark,
+  		st.remark remark,
+  		st.remark1 remark1,
+  		st.is_pay isPay
+  	    from sell_bill_tb st where st.sell_bill_id=#{sellBillId}
+  	</select>
+</mapper>

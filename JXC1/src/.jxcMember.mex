@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="member" location="0,0" size="0,0">
+    <action name="level_home" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="level_home.jsp" />
+      </result>
+    </action>
+    <action name="level_reg" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="level_reg.jsp" />
+      </result>
+    </action>
+    <action name="grade_*" location="0,0" size="0,0">
+      <result name="find">
+        <resourceEdge source="find" routing="0" target="level_home.jsp" />
+      </result>
+      <result name="modifyUi">
+        <resourceEdge source="modifyUi" routing="0" target="level_modify.jsp" />
+      </result>
+    </action>
+    <action name="member_*" location="0,0" size="0,0">
+      <result name="find">
+        <resourceEdge source="find" routing="0" target="member_maint_home.jsp" />
+      </result>
+      <result name="chgCsumHome">
+        <resourceEdge source="chgCsumHome" routing="0" target="charge_consume_home.jsp" />
+      </result>
+      <result name="regUI">
+        <resourceEdge source="regUI" routing="0" target="member_reg.jsp" />
+      </result>
+      <result name="modifyUI">
+        <resourceEdge source="modifyUI" routing="0" target="member_modify.jsp" />
+      </result>
+      <result name="chargeUI">
+        <resourceEdge source="chargeUI" routing="0" target="member_recharge.jsp" />
+      </result>
+    </action>
+    <action name="chag_csum_*" location="0,0" size="0,0">
+      <result name="home">
+        <resourceEdge source="home" routing="0" target="charge_consume_home.jsp" />
+      </result>
+      <result name="detail">
+        <resourceEdge source="detail" routing="0" target="member_consume.jsp" />
+      </result>
+      <result name="detail1">
+        <resourceEdge source="detail1" routing="0" target="member_charge.jsp" />
+      </result>
+    </action>
+    <action name="pack_*" location="0,0" size="0,0">
+      <result name="home">
+        <resourceEdge source="home" routing="0" target="pack_home.jsp" />
+      </result>
+      <result name="saveUI">
+        <resourceEdge source="saveUI" routing="0" target="pack_save.jsp" />
+      </result>
+    </action>
+  </package>
+  <webResource name="index.jsp" path="/index.jsp" location="505,990" size="150,55" />
+  <webResource name="login.jsp" path="/login.jsp" location="15,990" size="150,55" />
+  <webResource name="role_mgr.jsp" path="/WEB-INF/rightMgr/role_mgr.jsp" location="1201,115" size="150,55" />
+  <webResource name="role_add.jsp" path="/WEB-INF/rightMgr/role_add.jsp" location="1621,395" size="150,55" />
+  <webResource name="role_modify.jsp" path="/WEB-INF/rightMgr/role_modify.jsp" location="1194,780" size="150,55" />
+  <webResource name="role_auth.jsp" path="/WEB-INF/rightMgr/role_auth.jsp" location="1619,570" size="150,55" />
+  <webResource name="user_mgr.jsp" path="/WEB-INF/rightMgr/user_mgr.jsp" location="569,115" size="150,55" />
+  <webResource name="user_add.jsp" path="/WEB-INF/rightMgr/user_add.jsp" location="9,570" size="150,55" />
+  <webResource name="user_modify.jsp" path="/WEB-INF/rightMgr/user_modify.jsp" location="317,115" size="150,55" />
+  <webResource name="pwd_modify.jsp" path="/WEB-INF/rightMgr/pwd_modify.jsp" location="808,10" size="150,55" />
+  <webResource name="member_level.jsp" path="/WEB-INF/member/member_level.jsp" location="0,0" size="0,0" />
+  <webResource name="level_home.jsp" path="/WEB-INF/member/level_home.jsp" location="0,0" size="0,0" />
+  <webResource name="level_reg.jsp" path="/WEB-INF/member/level_reg.jsp" location="0,0" size="0,0" />
+  <webResource name="level_modify.jsp" path="/WEB-INF/member/level_modify.jsp" location="0,0" size="0,0" />
+  <webResource name="member_maint_home.jsp" path="/WEB-INF/member/member_maint_home.jsp" location="0,0" size="0,0" />
+  <webResource name="member_reg.jsp" path="/WEB-INF/member/member_reg.jsp" location="0,0" size="0,0" />
+  <webResource name="member_modify.jsp" path="/WEB-INF/member/member_modify.jsp" location="0,0" size="0,0" />
+  <webResource name="member_recharge.jsp" path="/WEB-INF/member/member_recharge.jsp" location="0,0" size="0,0" />
+  <webResource name="charge_consume_home.jsp" path="/WEB-INF/member/charge_consume_home.jsp" location="0,0" size="0,0" />
+  <webResource name="member_consume.jsp" path="/WEB-INF/member/member_consume.jsp" location="0,0" size="0,0" />
+  <webResource name="member_charge.jsp" path="/WEB-INF/member/member_charge.jsp" location="0,0" size="0,0" />
+  <webResource name="pack_home.jsp" path="/WEB-INF/member/pack_home.jsp" location="0,0" size="0,0" />
+  <webResource name="pack_save.jsp" path="/WEB-INF/member/pack_save.jsp" location="0,0" size="0,0" />
+</Struts2Diagram>
+
